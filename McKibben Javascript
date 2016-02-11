@@ -1,0 +1,30 @@
+// to create an array of strings.  This allows us to use Sarah's data cleaning stuff
+
+//things that need to be declared:
+var objects = [];
+var constraints = [];
+var sorted = [];
+
+// depending on how first/last is handled by Clayton:
+var first = "";  //FYI, Reading conflicting things on if "" counts as empty or null	
+var last = "";
+
+
+// The two functions will go with constraints button and objects button in GUI
+
+function addObjects(arr, item){
+//maybe add a line to make sure no duplicates in objects list already?
+arr.push(item);
+} //ends addObjects
+
+function addConstraints(array1, array2, constraint1, constraint2) {  //array=constraintsTemp
+temp1= constraint1.trim();		//Assuming this will work properly if only whitespace?
+temp2= constraint2.trim();
+if ((temp1 != null) && (temp1 != "") && (temp2 != null) && (temp2 != "")) {   //idiotproofing only putting in one piece, while other spaces or null.
+	var tempArr = []
+	tempArr[0]= temp1;
+	tempArr[1]= temp2;           
+	array.push(tempArr);		//pushes 2D array onto constraints array.
+}	//ends if
+} //ends addConstraint
+

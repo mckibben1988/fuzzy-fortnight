@@ -1,0 +1,119 @@
+# To change this license header, choose License Headers in Project Properties.
+# To change this template file, choose Tools | Templates
+# and open the template in the editor.
+
+import socket
+
+host= "write host address here";
+port= "write port number here";
+
+
+#create an INET, STREAMing socket
+sock = socket.socket(
+    socket.AF_INET, socket.SOCK_STREAM)
+#now connect to the web server on port 80
+# - the normal http port
+sock.create_connection((host, port))
+
+sock.send(100) #initiate the connection with the server
+
+accpt = sock.rcv(4096)  #receive confirmation from the server
+
+if accpt == 200: #if the correct confirmation code was received
+    print sock.rcv(4096) 				#print the next thing that the server sends
+
+#May want to consider adding in an else, i.e. if server is sending wrong thing.
+    
+
+response1 = input("Please enter y/n");          #http://stackoverflow.com/questions/70797/python-user-input-and-commandline-arguments
+print ("you entered", response1);		#print response, useful for debugging
+
+count = 0;
+while response1 != "y" and response1 != "n":
+    count+= 1;					#increments incorrect responses
+    if count == 3:
+    	sock.send(110) 				#send code to decline
+        print ("you have now had 3 incorrect replies.  Program terminating")
+	quit();					#could also use sys.exit() 
+    response1 = input("Please enter something: ");
+
+if response1 == "y":
+    sock.send(111) 				#send confirmation code
+    print ("'y' reply sent to server")		# this reply here primarily for debugging purposes
+
+if response1 == "n":
+    sock.send(110) 				#send code to decline
+    print("'n' reply sent to server");		# this reply here primarily for debugging purposes
+    quit();					#could also use sys.exit() 
+
+
+
+    
+accpt = sock.rcv(4096)  #receive confirmation from the server
+    
+if accpt == 210 #if server sends the correct code
+    print sock.rcv(4096) #print the next thing that the server sends
+    print "Knock Knock"				#is this redundant?
+
+
+responseWho = input("Respond with 'Who's there?" enter y/n");          #http://stackoverflow.com/questions/70797/python-user-input-and-commandline-arguments
+print ("you entered", responseWho);		#print response, useful for debugging
+
+count = 0;					#reset count
+while responseWho != "y" and responseWho != "n":
+    count+= 1;					#increments incorrect responses
+    if count == 3:
+    	sock.send(999) 				#send code to decline
+        print ("you have now had 3 incorrect replies.  Program terminating")
+	quit();					#could also use sys.exit() 
+    responseWho = input("Please enter something: ");
+
+if responseWho == "y":
+    sock.send(120) 				#send confirmation code
+    print ("'y' reply sent to server")		# this reply here primarily for debugging purposes
+
+if responseWho == "n":
+    sock.send(999) 				#send code to decline
+    print("'n' reply sent to server");		# this reply here primarily for debugging purposes
+    quit();					#could also use sys.exit() 
+
+
+
+accpt = sock.rcv(4096)
+
+if accpt == 220 #if server sends the correct code
+    print sock.rcv(4096) #print the next thing that the server sends
+  
+                                    #Whodey, in response to iconic cheer of the New Orleans Saints.
+whodey = "King Tut"         				#if we want to code multiple knock knocks, will need to change this to be code specific
+print (whodey);
+
+response2 = input("To continue joke, please type previous line and "who": ");          #http://stackoverflow.com/questions/70797/python-user-input-and-commandline-arguments
+print ("you entered", response2);
+who= " who"
+corresponse2 = (whodey+who);
+
+print ("corresponse2 is ", corresponse2);
+
+count = 0;
+while response2 != corresponse2:
+    count+= 1;
+    if count == 3:
+    	sock.send(999) 				#send code to decline
+        print ("you have now had 3 incorrect replies.  Program terminating")
+	quit();					#could also use sys.exit() 
+    response2 = input("Please enter something: ");
+
+
+if response2 == corresponse2:
+    print("You entered corresponse2");
+    sock.send(130) 				#send confirmation code
+
+
+accpt = sock.rcv(4096)
+
+if accpt == 230 #if server sends the correct code
+    print sock.rcv(4096) #print the next thing that the server sends
+    print "Ha ha ha!"
+
+sock.close()
